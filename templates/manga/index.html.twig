@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Manga List {% endblock %}
+
+{% block body %}
+<style>
+    body {
+        width: 80%;
+        margin: 20px auto;
+    }
+</style>
+             <a class="btn btn-outline-success" href="{{ path ('manga_create') }}">CREATE NEW MANGAs</a>
+             <br></br>
+        <table >
+            <tr scope="col">
+                {% for manga in mangas %} 
+                {% if manga.image == null %}
+                   <td scope="row" >  <img src="{{ asset ('images/Mangas/manga.jpg')}}" width="100px" height="100px"> </td>
+                {% else %}               
+                    <td scope="row" > <img src="{{ asset ('images/Mangas/' ~ manga.image)}}" width="200px" height="310px">.                   .</td>
+                {% endif %}     
+                {% endfor %}
+
+            </tr>
+            <tr >
+                {% for manga in mangas %}
+  
+                        <td scope="row" style="text-align: center;"> <a class="btn btn-warning" href="{{ path ('manga_detail', {'id' : manga.id} )}}">{{ manga.Name}}</a> </td>
+                {% endfor %}
+            </tr>
+        </table>
+
+{% endblock %}

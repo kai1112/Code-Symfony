@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Genre List {% endblock %}
+
+{% block body %}
+<style>
+    body {
+        width: 80%;
+        margin: 20px auto;
+    }
+</style>
+ 
+<div class="container-fluid">
+    <div class="container">
+        {% for flash in app.flashes("Info") %}
+            <p class="alert alert-success"> {{ flash }}
+        {% endfor %}
+        {% for flash in app.flashes("Error") %}
+            <p class="alert alert-danger"> {{ flash }}
+        {% endfor %}
+    </div>
+    <a class="btn btn-outline-success" href="{{ path ('genre_create') }}">CREATE NEW GENRE</a>
+    <br><br>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Actions</th> 
+            </tr>
+        </thead>
+        <tbody>
+        {% for genre in genres %}
+            <tr>
+                <td scope="row"> {{ genre.name }} </td>
+                <td>
+                    <a class="btn btn-warning" href="{{ path ('genre_detail', {'id' : genre.id} )}}">Detail</a>   
+                    <a class="btn btn-warning" href="{{ path ('genre_update', {'id' : genre.id} )}}">Update</a>
+                       <a class="btn btn-danger" href="{{ path ('genre_delete', {'id' : genre.id} )}}"  
+                                              onclick = "return confirm ('Are you sure to delete ?')" >      
+                    Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
